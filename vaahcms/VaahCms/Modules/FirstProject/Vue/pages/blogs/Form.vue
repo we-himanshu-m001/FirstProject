@@ -161,7 +161,7 @@ const toggleFormMenu = (event) => {
 
                 <VhField label="Image">
                     <div class="card">
-<!--                        <Toast />-->
+
                     <FileUpload name="image"
 
                                 :custom-upload="true"
