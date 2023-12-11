@@ -1,0 +1,28 @@
+{
+    "name": "vaahcms/firstproject",
+    "description": "FirstProject Manangement for Admin",
+    "version": "0.0.1",
+    "authors": [
+        {
+            "name": "vaah",
+            "email": "support@vaah.dev"
+        }
+    ],
+    "require": {
+        "php": "^7.0"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "VaahCms\\Modules\\FirstProject\\Providers\\FirstProjectServiceProvider"
+            ],
+            "aliases": {
+            }
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "VaahCms\\Modules\\FirstProject\\": ""
+        }
+    }
+}
