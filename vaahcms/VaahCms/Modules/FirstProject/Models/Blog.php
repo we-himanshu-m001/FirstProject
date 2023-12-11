@@ -668,6 +668,7 @@ class Blog extends Model
     }
 
     public static function uploadImage($request){
+//        dd($request->all());
         if($request->hasFile('image')){
             $file = $request->file('image');
             $file_name = time().'.' .$file->getClientOriginalExtension();

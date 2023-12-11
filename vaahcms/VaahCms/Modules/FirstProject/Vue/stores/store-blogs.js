@@ -337,7 +337,7 @@ export const useBlogStore = defineStore({
             );
         },
         setToast1: function (ttoast) {
-            console.log(ttoast,'prime')
+            // console.log(ttoast,'prime')
             this.toast1 = ttoast
         },
         upload(event){

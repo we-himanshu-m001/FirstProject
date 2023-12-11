@@ -228,6 +228,7 @@ class BlogsController extends Controller
 
     public function imageUploads(Request $request)
     {
+//        dd($request->all());
         try{
             return Blog::uploadImage($request,);
         }catch (\Exception $e){

@@ -163,7 +163,7 @@ const toggleFormMenu = (event) => {
                     <div class="card">
 <!--                        <Toast />-->
                     <FileUpload name="image"
-                                url="http://127.0.0.1:8000/backend/firstproject/blogs/upload"
+
                                 :custom-upload="true"
                                 mode="advanced"
                                 @uploader="store.upload"
