@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\DB;
 use VaahCms\Modules\FirstProject\Models\Blog;
 
 
@@ -20,13 +21,16 @@ class BlogsController extends Controller
     public function getAssets(Request $request)
     {
 
-        try{
+        try {
 
             $data = [];
 
             $data['permission'] = [];
             $data['rows'] = config('vaahcms.per_page');
-
+            $data['file_type'] = DB::table('vh_settings')
+                ->where('key','upload_allowed_files')
+                ->get();
+//            dd($data);
             $data['fillable']['columns'] = Blog::getFillableColumns();
             $data['fillable']['except'] = Blog::getUnFillableColumns();
             $data['empty_item'] = Blog::getEmptyItem();
@@ -36,13 +40,13 @@ class BlogsController extends Controller
             $response['success'] = true;
             $response['data'] = $data;
 
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             $response = [];
             $response['success'] = false;
-            if(env('APP_DEBUG')){
+            if (env('APP_DEBUG')) {
                 $response['errors'][] = $e->getMessage();
                 $response['hint'] = $e->getTrace();
-            } else{
+            } else {
                 $response['errors'][] = 'Something went wrong.';
             }
         }
@@ -53,191 +57,201 @@ class BlogsController extends Controller
     //----------------------------------------------------------
     public function getList(Request $request)
     {
-        try{
+        try {
             return Blog::getList($request);
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             $response = [];
             $response['success'] = false;
-            if(env('APP_DEBUG')){
+            if (env('APP_DEBUG')) {
                 $response['errors'][] = $e->getMessage();
                 $response['hint'] = $e->getTrace();
-            } else{
+            } else {
                 $response['errors'][] = 'Something went wrong.';
             }
             return $response;
         }
     }
+
     //----------------------------------------------------------
     public function updateList(Request $request)
     {
-        try{
+        try {
             return Blog::updateList($request);
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             $response = [];
             $response['success'] = false;
-            if(env('APP_DEBUG')){
+            if (env('APP_DEBUG')) {
                 $response['errors'][] = $e->getMessage();
                 $response['hint'] = $e->getTrace();
-            } else{
+            } else {
                 $response['errors'][] = 'Something went wrong.';
 
             }
             return $response;
         }
     }
+
     //----------------------------------------------------------
     public function listAction(Request $request, $type)
     {
 
 
-        try{
+        try {
             return Blog::listAction($request, $type);
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             $response = [];
             $response['success'] = false;
-            if(env('APP_DEBUG')){
+            if (env('APP_DEBUG')) {
                 $response['errors'][] = $e->getMessage();
                 $response['hint'] = $e->getTrace();
-            } else{
+            } else {
                 $response['errors'][] = 'Something went wrong.';
             }
             return $response;
 
         }
     }
+
     //----------------------------------------------------------
     public function deleteList(Request $request)
     {
-        try{
+        try {
             return Blog::deleteList($request);
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             $response = [];
             $response['success'] = false;
-            if(env('APP_DEBUG')){
+            if (env('APP_DEBUG')) {
                 $response['errors'][] = $e->getMessage();
                 $response['hint'] = $e->getTrace();
-            } else{
+            } else {
                 $response['errors'][] = 'Something went wrong.';
             }
             return $response;
         }
     }
+
     //----------------------------------------------------------
     public function fillItem(Request $request)
     {
-        try{
+        try {
             return Blog::fillItem($request);
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             $response = [];
             $response['success'] = false;
-            if(env('APP_DEBUG')){
+            if (env('APP_DEBUG')) {
                 $response['errors'][] = $e->getMessage();
                 $response['hint'] = $e->getTrace();
-            } else{
+            } else {
                 $response['errors'][] = 'Something went wrong.';
             }
             return $response;
         }
     }
+
     //----------------------------------------------------------
     public function createItem(Request $request)
     {
-        try{
+        try {
             return Blog::createItem($request);
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             $response = [];
             $response['success'] = false;
-            if(env('APP_DEBUG')){
+            if (env('APP_DEBUG')) {
                 $response['errors'][] = $e->getMessage();
                 $response['hint'] = $e->getTrace();
-            } else{
+            } else {
                 $response['errors'][] = 'Something went wrong.';
             }
             return $response;
         }
     }
+
     //----------------------------------------------------------
     public function getItem(Request $request, $id)
     {
-        try{
+        try {
             return Blog::getItem($id);
-        }catch (\Exception $e){
+        } catch (\Exception $e) {
             $response = [];
             $response['success'] = false;
-            if(env('APP_DEBUG')){
+            if (env('APP_DEBUG')) {
                 $response['errors'][] = $e->getMessage();
                 $response['hint'] = $e->getTrace();
-            } else{
+            } else {
                 $response['errors'][] = 'Something went wrong.';
             }
             return $response;
         }
     }
+
     //----------------------------------------------------------
-    public function updateItem(Request $request,$id)
+    public function updateItem(Request $request, $id)
     {
-        try{
-            return Blog::updateItem($request,$id);
-        }catch (\Exception $e){
+        try {
+            return Blog::updateItem($request, $id);
+        } catch (\Exception $e) {
             $response = [];
             $response['success'] = false;
-            if(env('APP_DEBUG')){
+            if (env('APP_DEBUG')) {
                 $response['errors'][] = $e->getMessage();
                 $response['hint'] = $e->getTrace();
-            } else{
+            } else {
                 $response['errors'][] = 'Something went wrong.';
             }
             return $response;
         }
     }
+
     //----------------------------------------------------------
-    public function deleteItem(Request $request,$id)
+    public function deleteItem(Request $request, $id)
     {
-        try{
-            return Blog::deleteItem($request,$id);
-        }catch (\Exception $e){
+        try {
+            return Blog::deleteItem($request, $id);
+        } catch (\Exception $e) {
             $response = [];
             $response['success'] = false;
-            if(env('APP_DEBUG')){
+            if (env('APP_DEBUG')) {
                 $response['errors'][] = $e->getMessage();
                 $response['hint'] = $e->getTrace();
-            } else{
+            } else {
                 $response['errors'][] = 'Something went wrong.';
             }
             return $response;
         }
     }
+
     //----------------------------------------------------------
-    public function itemAction(Request $request,$id,$action)
+    public function itemAction(Request $request, $id, $action)
     {
-        try{
-            return Blog::itemAction($request,$id,$action);
-        }catch (\Exception $e){
+        try {
+            return Blog::itemAction($request, $id, $action);
+        } catch (\Exception $e) {
             $response = [];
             $response['success'] = false;
-            if(env('APP_DEBUG')){
+            if (env('APP_DEBUG')) {
                 $response['errors'][] = $e->getMessage();
                 $response['hint'] = $e->getTrace();
-            } else{
+            } else {
                 $response['errors'][] = 'Something went wrong.';
             }
             return $response;
         }
     }
+
     //----------------------------------------------------------
 
     public function imageUploads(Request $request)
     {
 //        dd($request->all());
-        try{
-            return Blog::uploadImage($request,);
-        }catch (\Exception $e){
+        try {
+            return Blog::uploadImage($request);
+        } catch (\Exception $e) {
             $response = [];
             $response['success'] = false;
-            if(env('APP_DEBUG')){
+            if (env('APP_DEBUG')) {
                 $response['errors'][] = $e->getMessage();
                 $response['hint'] = $e->getTrace();
-            } else{
+            } else {
                 $response['errors'][] = 'Something went wrong.';
             }
             return $response;

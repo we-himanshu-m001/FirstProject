@@ -91,7 +91,6 @@ const toggleFormMenu = (event) => {
                         data-testid="blogs-form-menu"
                         icon="pi pi-angle-down"
                         aria-haspopup="true"/>
-
                     <Menu ref="form_menu"
                           :model="store.form_menu_list"
                           :popup="true" />
@@ -167,10 +166,18 @@ const toggleFormMenu = (event) => {
                                 :custom-upload="true"
                                 mode="advanced"
                                 @uploader="store.upload"
+                                :accept="store.formatted_fileTypes"
                                 :multiple="true"
                                 :maxFileSize="1000000">
-                        <template #empty>
-                            <p>Drag and drop files to here to upload.</p>
+                        <template #empty class="flex">
+                            <p v-if="!store.item.image">Drag and drop files here to upload.</p>
+                            <p v-if="store.item.image">
+                                <img class="w-4 h-4rem" :src="`uploads/`+store.item.image"/>
+
+                                <i class="pi pi-times text-2xl font-bold cursor-pointer text-red-500 ml-4" @click="store.clearimage"></i>
+                            </p>
+
+
                         </template>
                     </FileUpload>
                     </div>
@@ -193,3 +200,17 @@ const toggleFormMenu = (event) => {
     </div>
 
 </template>
+
+<style>
+.p-fileupload .p-fileupload-buttonbar {
+    display: flex;
+    flex-wrap: nowrap;
+    /*justify-content: space-between;*/
+
+}
+.p-fileupload .p-fileupload-buttonbar .p-button{
+    color:white;
+    background-color:#10b981;
+}
+
+</style>

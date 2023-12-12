@@ -53,6 +53,8 @@ class Blog extends Model
         return $date->format($date_time_format);
     }
 
+
+
     //-------------------------------------------------
     public static function getUnFillableColumns()
     {

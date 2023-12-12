@@ -69,6 +69,7 @@ export const useBlogStore = defineStore({
         item_menu_state: null,
         form_menu_list: [],
         toast1:null,
+        formatted_fileTypes:[],
 
     }),
     getters: {
@@ -182,6 +183,16 @@ export const useBlogStore = defineStore({
         //---------------------------------------------------------------------
         afterGetAssets(data, res)
         {
+
+            const fileTypes = JSON.parse(data.file_type[0].value);
+                // console.log(fileTypes)
+            if (fileTypes && fileTypes.length > 0) {
+                this.formatted_fileTypes = fileTypes.map(fileType => `.${fileType}`).join(', ');
+                // console.log(this.formatted_fileTypes)
+            } else {
+                this.formatted_fileTypes = null;
+            }
+
             if(data)
             {
                 this.assets = data;
@@ -352,11 +363,16 @@ export const useBlogStore = defineStore({
                 }
             ).then(res => {
                 if(res) {
+
                     this.item.image = res.data.image_name;
                     this.toast1.add({ severity: 'info', summary: 'Success', detail: 'This File Uploaded', life: 3000 });
                     // console.log(this.toast1.add({summary: 'Success'}),'hello')
                 }
             })
+        },
+        clearimage(){
+            // alert('hello')
+            this.item.image = null
         },
         //---------------------------------------------------------------------
         async itemAction(type, item=null){
