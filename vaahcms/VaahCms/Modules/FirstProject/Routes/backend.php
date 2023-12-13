@@ -34,3 +34,6 @@ Route::group(
  */
 //include("backend/routes-example.php");
 include('backend/routes-blogs.php');
+include('backend/routes-products.php');
+include('backend/routes-categories.php');
+
